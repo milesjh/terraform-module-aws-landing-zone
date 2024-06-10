@@ -292,8 +292,8 @@ resource "tfe_workspace" "main" {
   tag_names         = [lower(var.new_project_name), lower(var.environment), lower(var.team_name), "azdo"]
 
   vcs_repo {
-    branch = "refs/heads/master"
-    identifier     = "milesjh365-sandbox/hcp-demo-june24/_git/${azuredevops_git_repository.main.name}" #azuredevops_git_repository.main.id
+    # branch = "refs/heads/master"
+    identifier     = "milesjh365-sandbox/hcp-demo-june24/_git/${azuredevops_git_repository.main.name}"
     oauth_token_id = var.oauth_token_id
   }
 
