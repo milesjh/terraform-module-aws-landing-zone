@@ -287,11 +287,12 @@ resource "tfe_workspace" "main" {
   name              = "${var.new_project_name}"
   organization      = var.tf_org
   auto_apply        = true
-  queue_all_runs    = false
+  queue_all_runs    = true
   terraform_version = "~> 1.8.0"
   tag_names         = [lower(var.new_project_name), lower(var.environment), lower(var.team_name), "azdo"]
 
   vcs_repo {
+    branch = "refs/heads/master"
     identifier     = "milesjh365-sandbox/hcp-demo-june24/_git/${azuredevops_git_repository.main.name}" #azuredevops_git_repository.main.id
     oauth_token_id = var.oauth_token_id
   }
