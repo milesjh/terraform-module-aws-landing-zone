@@ -157,9 +157,9 @@ resource "tfe_project_variable_set" "project_default_tags" {
 
 locals {
     default_tags = {
-        project = var.new_project_name
-        team = var.team_name
-        environment = var.environment
+        project = lower(var.new_project_name)
+        team = lower(var.team_name)
+        environment = lower(var.environment)
     }
     creds = [
         "ARM_CLIENT_ID",
