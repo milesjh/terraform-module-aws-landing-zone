@@ -285,6 +285,7 @@ resource "time_sleep" "wait35s" {
 
 resource "tfe_workspace" "main" {
   name              = "${var.new_project_name}"
+  project_id        = tfe_project.main.id
   organization      = var.tf_org
   auto_apply        = true
   queue_all_runs    = true
