@@ -136,7 +136,7 @@ resource "tfe_project_variable_set" "project_vault_auth" {
 }
 
 resource "tfe_variable" "hvs_creds" {
-  for_each     = local.creds
+  for_each     = zipmap(local.creds, local.creds)
   key          = each.key
   value        = data.hcp_vault_secrets_secret.sandbox-creds[each.key].secret_value
   category     = "env"
