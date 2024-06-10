@@ -161,8 +161,7 @@ locals {
         team = var.team_name
         environment = var.environment
     }
-    creds = {
-        [
+    creds = [
         "ARM_CLIENT_ID",
         "ARM_CLIENT_SECRET",
         "ARM_SUBSCRIPTION_ID",
@@ -173,7 +172,6 @@ locals {
         "HCP_CLIENT_SECRET",
         "HCP_PROJECT_ID"
     ]
-    }
 }
 
 resource "tfe_variable" "default_tags" {
