@@ -1,6 +1,6 @@
 mock_provider "tfe" {}
 mock_provider "hcp" {}
-mock_provider "azure_devops" {}
+mock_provider "azuredevops" {}
 
 # WARNING: Generated module tests should be considered experimental and be reviewed by the module author.
 
