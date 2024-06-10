@@ -289,7 +289,7 @@ resource "tfe_workspace" "main" {
   auto_apply        = true
   queue_all_runs    = false
   terraform_version = "~> 1.8.0"
-  tag_names         = [var.new_project_name, var.environment, var.team_name, "azdo"]
+  tag_names         = [lower(var.new_project_name), lower(var.environment), lower(var.team_name), "azdo"]
 
   vcs_repo {
     branch         = "master"
