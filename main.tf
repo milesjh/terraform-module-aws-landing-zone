@@ -118,8 +118,10 @@ resource "tfe_team_project_access" "main" {
 #   bound_claims_type = "glob"
 # }
 
-data "hcp_vault_secrets_app" "sandbox-creds" {
+data "hcp_vault_secrets_secret" "sandbox-creds" {
+    for_each = local.creds
     app_name = "sandbox-creds"
+    secret_name = each.key
 }
 
 resource "tfe_variable_set" "project_vault_auth" {
@@ -134,9 +136,9 @@ resource "tfe_project_variable_set" "project_vault_auth" {
 }
 
 resource "tfe_variable" "hvs_creds" {
-  for_each     = data.hcp_vault_secrets_app.sandbox-creds.secrets
+  for_each     = local.creds
   key          = each.key
-  value        = each.value
+  value        = data.hcp_vault_secrets_secret.sandbox-creds[each.key].secret_value
   category     = "env"
   sensitive    = true
   variable_set_id = tfe_variable_set.project_vault_auth.id
@@ -158,6 +160,19 @@ locals {
         project = var.new_project_name
         team = var.team_name
         environment = var.environment
+    }
+    creds = {
+        [
+        "ARM_CLIENT_ID",
+        "ARM_CLIENT_SECRET",
+        "ARM_SUBSCRIPTION_ID",
+        "ARM_TENANT_ID",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "HCP_CLIENT_ID",
+        "HCP_CLIENT_SECRET",
+        "HCP_PROJECT_ID"
+    ]
     }
 }
 
