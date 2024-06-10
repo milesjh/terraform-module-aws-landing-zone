@@ -119,7 +119,7 @@ resource "tfe_team_project_access" "main" {
 # }
 
 data "hcp_vault_secrets_secret" "sandbox-creds" {
-    for_each = local.creds
+    for_each = zipmap(local.creds, local.creds)
     app_name = "sandbox-creds"
     secret_name = each.key
 }
