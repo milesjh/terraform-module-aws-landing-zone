@@ -1,4 +1,4 @@
-/*mock_provider "tfe" {}
+mock_provider "tfe" {}
 mock_provider "hcp" {}
 mock_provider "azure_devops" {}
 
@@ -135,4 +135,3 @@ run "tfe_variable_validation" {
     error_message = "incorrect workspace id"
   }
 }
-*/
