@@ -82,7 +82,7 @@ resource "tfe_team" "main" {
     # sso_team_id = var.new_project_name
 }
 
-resource "tfe_project_team_access" "main" {
+resource "tfe_team_project_access" "main" {
     access = "admin"
     team_id = tfe_team.main.id
     project_id = tfe_project.main.id
@@ -119,7 +119,7 @@ resource "tfe_project_team_access" "main" {
 # }
 
 data "hcp_vault_secrets_app" "sandbox-creds" {
-    app_name = sandbox-creds
+    app_name = "sandbox-creds"
 }
 
 resource "tfe_variable_set" "project_vault_auth" {
@@ -276,7 +276,7 @@ resource "tfe_workspace" "main" {
   auto_apply        = true
   queue_all_runs    = false
   terraform_version = "~> 1.8.0"
-  tag_names         = flatten(local.default_tags.values, "azdo")
+  tag_names         = [var.new_project_name, var.environment, var.team_name, "azdo"]
 
   vcs_repo {
     branch         = "master"
